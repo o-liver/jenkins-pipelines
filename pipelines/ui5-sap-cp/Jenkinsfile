@@ -23,6 +23,8 @@ node() {
     deleteDir()
     dir(APP_PATH) {
       checkout scm
+      sh "ls -a"
+      sh "ls ${SRC}/.pipeline"
       setupCommonPipelineEnvironment script: this, configFile: CONFIG_FILE
     }
     MTA_JAR_LOCATION = commonPipelineEnvironment.getConfigProperty('MTA_HOME')
