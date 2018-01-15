@@ -20,7 +20,7 @@ node() {
 
   stage("Clone sources and setup environment"){
     deleteDir()
-    dir(APP_PATH) {
+    dir(SRC) {
       checkout([$class: 'GitSCM', 
                 branches: [[name: params.GIT_BRANCH]], 
                 doGenerateSubmoduleConfigurations: false, 
