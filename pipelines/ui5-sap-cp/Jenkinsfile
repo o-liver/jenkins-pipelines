@@ -37,6 +37,12 @@ node() {
 
   stage("Build Fiori App"){
     dir(SRC){
+      writeFile file: '.npmrc', text: """
+                                      @sap:registry = ${params.sapNpmRegistry}
+                                      registry = ${params.npmRegistry}
+                                      proxy = ${proxy}
+                                      https-proxy = ${httpsProxy}
+                                      """
       withEnv(["http_proxy=${proxy}", "https_proxy=${httpsProxy}"]) {
         MTAR_FILE_PATH = mtaBuild mtaJarLocation: MTA_JAR_LOCATION, buildTarget: 'NEO'
       }
