@@ -20,14 +20,12 @@ node() {
 
   stage("Clone sources and setup environment"){
     deleteDir()
-    dir(SRC) {
-      checkout([$class: 'GitSCM', 
-                branches: [[name: params.GIT_BRANCH]], 
-                doGenerateSubmoduleConfigurations: false, 
-                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: APP_PATH]], 
-                submoduleCfg: [], 
-                userRemoteConfigs: [[url: params.GIT_URL]]])
-    }
+    checkout([$class: 'GitSCM', 
+              branches: [[name: params.GIT_BRANCH]], 
+              doGenerateSubmoduleConfigurations: false, 
+              extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: APP_PATH]], 
+              submoduleCfg: [], 
+              userRemoteConfigs: [[url: params.GIT_URL]]])
     commonPipelineEnvironment.setConfigProperties([ DEPLOY_HOST: 'hanatrial.ondemand.com',
                                                     CI_DEPLOY_ACCOUNT: 'p1942792592trial',
                                                     neoCredentialsId: 'cp-P1942792592'])
