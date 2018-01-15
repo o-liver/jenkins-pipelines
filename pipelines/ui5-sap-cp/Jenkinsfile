@@ -33,6 +33,8 @@ node() {
                                                     neoCredentialsId: 'cp-P1942792592'])
     MTA_JAR_LOCATION = '/opt/mta'
     NEO_HOME = '/usr/local/tools/neo-java-web-sdk'
+    proxy = commonPipelineEnvironment.getConfigProperty('proxy') ?: ''
+    httpsProxy = commonPipelineEnvironment.getConfigProperty('httpsProxy') ?: ''
   }
 
   stage("Build Fiori App"){
