@@ -42,7 +42,7 @@ node() {
                                       https-proxy = ${httpsProxy}
                                       """
       withEnv(["http_proxy=${proxy}", "https_proxy=${httpsProxy}"]) {
-        MTAR_FILE_PATH = mtaBuild mtaJarLocation: params.MTA_JAR_LOCATION, buildTarget: 'NEO'
+        MTAR_FILE_PATH = mtaBuild mtaJarLocation: env.MTA_HOME, buildTarget: 'NEO'
       }
     }
   }
@@ -50,7 +50,7 @@ node() {
   stage("Deploy Fiori App"){
     dir(SRC){
       withEnv(["http_proxy=${proxy}", "https_proxy=${httpsProxy}"]) {
-        neoDeploy script: this, neoHome: params.NEO_HOME, archivePath: MTAR_FILE_PATH
+        neoDeploy script: this, neoHome: env.NEO_HOME, archivePath: MTAR_FILE_PATH
       }
     }
   }
